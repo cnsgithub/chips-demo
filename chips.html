@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<h1>CHIPS demo</h1>
+
+<input type="button" onclick="setCookies()" value="Start Demo">
+
+</body>
+<script type="application/javascript">
+
+    function setCookies() {
+        // Set a traditional cookie
+        document.cookie = 'SID=z36v9DE3pDYbWmKr1FV-Kimo2-GtViHn0wchbCpk; Path=/; Secure;'
+        console.log('Cookies:', document.cookie) // The only present cookie is the cookie just set.
+
+        // Set a cookie with the same name, path and domain again, this time with the partitioned flag.
+		// The expected behavior here would be, that this cookie replaces the first cookie.
+        document.cookie = 'SID=z36v9DE3pDYbWmKr1FV-Kimo2-GtViHn0wchbCpk; Path=/; Secure; Partitioned;'
+        console.log('Cookies:', document.cookie)
+        console.log('The document now has two cookies with the same name, for the same domain and path.') // note - this isn't visible in the dev tools cookie view
+
+        // this request will send both cookies to the server
+        fetch('/').then(r => console.log(r));
+
+        return false;
+    }
+
+</script>
+</html>
